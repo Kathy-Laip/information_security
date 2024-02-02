@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Messages</title>
+</head>
+<body>
+    <main>
+        <div class="mes">
+            <p>Сообщения</p>
+            <div id="messages">
+            </div>
+        </div>
+        <div class="messend">
+            <p>Написать сообщение</p>
+            <input  id="messageBox"></input>
+        </div>
+        <button class="btn" id="enter">
+            Отправить
+        </button>
+    </main>
+</body>
+<script>
+    let enterButton = document.getElementById('enter')
+
+    async function apiData(obj, strAPI, methodType='POST') {
+        try{
+            let res = await fetch(strAPI,{
+                method: methodType,
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+            })
+            let result = await res.json()
+            return result
+        }
+        catch{
+            alert('Ошибка!')
+        }
+    }
+
+    setInterval(
+        () => {
+            let res = apiData({}, '/check_messages')
+            res.then(value => {
+                if(value.status === 'failed') {
+                    alert('Что-то пошло не так!')
+                }
+                if(value.status === 'ok') {
+                    let box = document.getElementById('messages')
+
+                    if (value.messages.length != 0) {
+                        alert('Вам пришли новые сообщения!')
+                    }
+
+                    for (const message of value.messages) {
+                        box.innerHTML +=
+                            `
+                                <div class="message">${message}</div>   
+                            `
+                    }
+                }
+            })
+        }, 500
+    )
+
+    enterButton.addEventListener('click', () => {
+        let message = document.getElementById('messageBox').value
+
+        if(!message){
+            alert('Ошибка ввода данных! Введите пустые поля.')
+        } else{
+            let obj = {
+                'message': message,
+            }
+            let res = apiData(obj, '/send_message')
+            res.then(value => {
+                if(value.status === 'failed') {
+                    alert('Что-то пошло не так!')
+                }
+                if(value.status === 'ok') {
+                    console.log('message sent')
+                    let box = document.getElementById('messages')
+                    box.innerHTML +=
+                        `
+                            <div class="myMessage">${message}</div>   
+                        `
+                    message.innerHTML = ''
+                }
+            })
+
+        }
+    })
+    // const socket = new WebSocket('ws://127.0.0.1:15002')
+    // socket.onopen = function() {
+    //     alert("Соединение установлено.");
+    // };
+    // socket.onclose = function(event) {
+    //     if (event.wasClean) {
+    //       alert('Соединение закрыто чисто');
+    //     } else {
+    //       alert('Обрыв соединения'); // например, "убит" процесс сервера
+    //     }
+    //     alert('Код: ' + event.code + ' причина: ' + event.reason);
+    // };
+
+    // socket.onmessage = function(event) {
+    // //   alert("Получены данные " + event.data);
+    //     let box = document.getElementById('messages')
+    //     box.innerHTML += 
+    //     `
+    //         <div class="message">${event.data}</div>   
+    //     `
+    // };
+
+    // enterButton.addEventListener('click', () => {
+    //     let mes = document.getElementById('messageBox').value
+    //     if(!mes){
+    //         alert('Невозможно отправить пустое сообщение')
+    //     } else{
+    //         console.log(mes);
+    //         socket.send(mes);
+    //     }
+    // })
+
+    // socket.onerror = function(error) {
+    //   alert("Ошибка " + error.message);
+    // };
+
+</script>
+</html>

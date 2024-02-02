@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn{
+  background-color: wheat;
+  color: black;
+
+  font-size: 2.5rem;
+  font-weight: 500;
+
+  width: 20%;
+  height: 8vh;
+
+  margin: 2rem 5rem;
+
+  border-radius: 15px;
+  border: none;
+}
+
+textarea{
+  resize: none;
+  font-size: 1.5rem;
+
+  width: 100%;
+  height: 100%;
+}
+
+input{
+  font-size: 1.5rem;
+
+  width: 100%;
+  height: 100%;
+}
+
+p{
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.inputText{
+  width: 40%;
+
+  margin: 2rem 5rem;
+}
+
+.inputText p{
+  margin: 2rem 0;
+}
+
+.text{
+  margin: 2rem 5rem;
+  width: 44%;
+  height: 80%;
+}
+
+.settings{
+  margin: 2rem 5rem;
+
+  width: 44%;
+}
+
+.settings select{
+  font-size: 1.5rem;
+}
+
+.textHack{
+  margin: 2rem 5rem;
+
+  height: 20vh;
+  width: 44%;
+}
+
+.btn-gener{
+  height: 15vh;
+}

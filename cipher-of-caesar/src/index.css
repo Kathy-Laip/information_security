@@ -1,0 +1,65 @@
+*{
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+}
+
+p{
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+textarea{
+  resize: none;
+  font-size: 1.5rem;
+
+  width: 100%;
+  height: 100%;
+}
+
+.btn{
+  background-color: wheat;
+  color: black;
+
+  font-size: 2.5rem;
+  font-weight: 500;
+
+  width: 20%;
+
+  margin: 2rem 5rem;
+
+  border-radius: 15px;
+  border: none;
+}
+
+
+main{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.text{
+  margin: 2rem 5rem;
+
+  width: 44%;
+}
+
+.settings{
+  margin: 2rem 5rem;
+
+  width: 44%;
+}
+
+.settings select{
+  font-size: 2rem;
+
+  width: 100%;
+  height: 100%;
+}
